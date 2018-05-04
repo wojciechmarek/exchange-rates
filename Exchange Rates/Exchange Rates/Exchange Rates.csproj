@@ -93,5 +93,20 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8_USA_96px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8_Flag_Of_Europe_96px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\icons8_Australia_96px.png" />
+    <Resource Include="Icons\icons8_Canada_96px.png" />
+    <Resource Include="Icons\icons8_Great_Britain_96px_3.png" />
+    <Resource Include="Icons\icons8_Japan_96px.png" />
+    <Resource Include="Icons\icons8_New_Zealand_96px.png" />
+    <Resource Include="Icons\icons8_Russian_Federation_96px.png" />
+    <Resource Include="Icons\icons8_Switzerland_96px.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ExchangeRates"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="ExchangeRates.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="850" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Title="MainWindow" Height="600" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -102,18 +102,123 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid Background="#FF262946">
+    <Grid Background="#FF1B2028">
 
-        <Grid HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="850" Background="#FF0F1036" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
-            <Label Content="Kursy walut" HorizontalAlignment="Left" Margin="30,5,0,0" VerticalAlignment="Top" Height="29" Width="765" FontFamily="Corbel" Background="{x:Null}" Foreground="White" FontSize="17"/>
-            <Button x:Name="exit_button" Content="X" HorizontalAlignment="Left" Margin="809,6,0,0" VerticalAlignment="Top" Width="34" Height="27" Background="#FF1F2055" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource exitButton_Style}"/>
+        <Grid HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="1000" Background="#FF0166CF" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+            <Label x:Name="titleLabel" Content="Kursy walut" HorizontalAlignment="Left" Margin="30,5,0,0" VerticalAlignment="Top" Height="29" Width="765" FontFamily="Century Gothic" Background="{x:Null}" Foreground="White" FontSize="17"/>
+            <Button x:Name="exit_button" Content="X" HorizontalAlignment="Left" Margin="948,0,0,0" VerticalAlignment="Top" Width="52" Height="40" Background="#FF0166CF" BorderBrush="{x:Null}" Foreground="White" Style="{DynamicResource exitButton_Style}" Click="navButton_Click" FontSize="16"/>
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="460" Margin="0,40,0,0" VerticalAlignment="Top" Width="176" Background="#FF374361">
-            <Button x:Name="navButton_close" Content="Waluty" HorizontalAlignment="Left" Height="80" VerticalAlignment="Top" Width="176" Background="#FF374361" BorderBrush="{x:Null}" Foreground="White" IsTabStop="False" FontFamily="Corbel" FontSize="18" Click="navButton_Click" Style="{DynamicResource ButtonStyle1}" Margin="0,80,0,0"/>
-            <Button x:Name="navButton_close_Copy" Content="Przelicznik" HorizontalAlignment="Left" Height="80" VerticalAlignment="Top" Width="176" Background="#FF374361" BorderBrush="{x:Null}" Foreground="White" IsTabStop="False" FontFamily="Corbel" FontSize="18" Click="navButton_Click" Style="{DynamicResource ButtonStyle1}" Margin="0,160,0,0"/>
-            <Button x:Name="navButton_close_Copy1" Content="Info" HorizontalAlignment="Left" Height="80" VerticalAlignment="Top" Width="176" Background="#FF374361" BorderBrush="{x:Null}" Foreground="White" IsTabStop="False" FontFamily="Corbel" FontSize="18" Click="navButton_Click" Style="{DynamicResource ButtonStyle1}" Margin="0,240,0,0"/>
-            <Button x:Name="navButton_close_Copy2" Content="Główna" HorizontalAlignment="Left" Height="80" VerticalAlignment="Top" Width="176" Background="#FF374361" BorderBrush="{x:Null}" Foreground="White" IsTabStop="False" FontFamily="Corbel" FontSize="18" Click="navButton_Click" Style="{DynamicResource ButtonStyle1}"/>
+        <Grid HorizontalAlignment="Left" Height="560" Margin="0,40,0,-39" VerticalAlignment="Top" Width="176" Background="#FF242E3A">
+            <Button x:Name="navButton_currency" Content="Waluty" HorizontalAlignment="Left" Height="80" VerticalAlignment="Top" Width="176" Background="#FF242E3A" BorderBrush="{x:Null}" Foreground="White" IsTabStop="False" FontFamily="Century Gothic" FontSize="18" Click="navButton_Click" Style="{DynamicResource ButtonStyle1}" Margin="0,80,0,0"/>
+            <Button x:Name="navButton_converter" Content="Przelicznik" HorizontalAlignment="Left" Height="80" VerticalAlignment="Top" Width="176" Background="#FF242E3A" BorderBrush="{x:Null}" Foreground="White" IsTabStop="False" FontFamily="Century Gothic" FontSize="18" Click="navButton_Click" Style="{DynamicResource ButtonStyle1}" Margin="0,160,0,0"/>
+            <Button x:Name="navButton_author" Content="Autor" HorizontalAlignment="Left" Height="80" VerticalAlignment="Top" Width="176" Background="#FF242E3A" BorderBrush="{x:Null}" Foreground="White" IsTabStop="False" FontFamily="Century Gothic" FontSize="18" Click="navButton_Click" Style="{DynamicResource ButtonStyle1}" Margin="0,240,0,0"/>
+            <Button x:Name="navButton_main" Content="Główna" HorizontalAlignment="Left" Height="80" VerticalAlignment="Top" Width="176" Background="#FF242E3A" BorderBrush="{x:Null}" Foreground="White" IsTabStop="False" FontFamily="Century Gothic" FontSize="18" Click="navButton_Click" Style="{DynamicResource ButtonStyle1}"/>
         </Grid>
+
+        <!--main-->
+        <Grid x:Name="Main_Grid" HorizontalAlignment="Left" Height="555" Margin="181,45,0,0" VerticalAlignment="Top" Width="819" Visibility="Hidden">
+            <Label Content="Główne kursy walut z dnia {DateTime}" HorizontalAlignment="Left" Margin="35,46,0,0" VerticalAlignment="Top" Width="715" Height="60" Background="#00000000" Foreground="White" FontSize="24"/>
+            <Grid HorizontalAlignment="Left" Height="100" Margin="10,156,0,0" VerticalAlignment="Top" Width="260" Background="#FF141823">
+                <Label Content="Dolar amerykański" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="150" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Label Content="4,45 PLN" HorizontalAlignment="Left" Margin="95,31,0,0" VerticalAlignment="Top" Width="155" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="51" FontSize="24"/>
+                <Image Source="Icons\icons8_USA_96px.png" Margin="10,20,150,20" />
+            </Grid>
+            <Grid HorizontalAlignment="Left" Height="100" Margin="280,156,0,0" VerticalAlignment="Top" Width="260" Background="#FF141823">
+                <Label Content="Euro" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="150" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Label Content="4,45 PLN" HorizontalAlignment="Left" Margin="95,31,0,0" VerticalAlignment="Top" Width="155" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="51" FontSize="24"/>
+                <Image Source="Icons/icons8_Flag_Of_Europe_96px.png" Margin="10,20,150,20" />
+            </Grid>
+            <Grid HorizontalAlignment="Left" Height="100" Margin="549,156,0,0" VerticalAlignment="Top" Width="260" Background="#FF141823">
+                <Label Content="Frank szwajcarski" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="150" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Label Content="4,45 PLN" HorizontalAlignment="Left" Margin="95,31,0,0" VerticalAlignment="Top" Width="155" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="51" FontSize="24"/>
+                <Image Source="Icons/icons8_Switzerland_96px.png" Margin="10,20,150,20" />
+            </Grid>
+            <Grid HorizontalAlignment="Left" Height="100" Margin="10,266,0,0" VerticalAlignment="Top" Width="260" Background="#FF141823">
+                <Label Content="Dolar kanadyjski" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="150" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Label Content="4,45 PLN" HorizontalAlignment="Left" Margin="95,31,0,0" VerticalAlignment="Top" Width="155" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="51" FontSize="24"/>
+                <Image Source="Icons/icons8_Canada_96px.png" Margin="10,20,150,20" />
+            </Grid>
+            <Grid HorizontalAlignment="Left" Height="100" Margin="280,266,0,0" VerticalAlignment="Top" Width="260" Background="#FF141823">
+                <Label Content="Funt brytyjski" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="150" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Label Content="4,45 PLN" HorizontalAlignment="Left" Margin="95,31,0,0" VerticalAlignment="Top" Width="155" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="51" FontSize="24"/>
+                <Image Source="Icons/icons8_Great_Britain_96px_3.png" Margin="10,20,150,20" />
+            </Grid>
+            <Grid HorizontalAlignment="Left" Height="100" Margin="549,266,0,0" VerticalAlignment="Top" Width="260" Background="#FF141823">
+                <Label Content="Dolar nowozelandzki" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="150" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Label Content="4,45 PLN" HorizontalAlignment="Left" Margin="95,31,0,0" VerticalAlignment="Top" Width="155" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="51" FontSize="24"/>
+                <Image Source="Icons/icons8_New_Zealand_96px.png" Margin="10,20,150,20" />
+            </Grid>
+            <Grid HorizontalAlignment="Left" Height="100" Margin="10,376,0,0" VerticalAlignment="Top" Width="260" Background="#FF141823">
+                <Label Content="Dolar australijski" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="150" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Label Content="4,45 PLN" HorizontalAlignment="Left" Margin="95,31,0,0" VerticalAlignment="Top" Width="155" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="51" FontSize="24"/>
+                <Image Source="Icons/icons8_Australia_96px.png" Margin="10,20,150,20" />
+            </Grid>
+            <Grid HorizontalAlignment="Left" Height="100" Margin="280,376,0,0" VerticalAlignment="Top" Width="260" Background="#FF141823">
+                <Label Content="Rubel rosyjski" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="150" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Label Content="4,45 PLN" HorizontalAlignment="Left" Margin="95,31,0,0" VerticalAlignment="Top" Width="155" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="51" FontSize="24"/>
+                <Image Source="Icons/icons8_Russian_Federation_96px.png" Margin="10,20,150,20" />
+            </Grid>
+            <Grid HorizontalAlignment="Left" Height="100" Margin="549,376,0,0" VerticalAlignment="Top" Width="260" Background="#FF141823">
+                <Label Content="Jen japoński" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="150" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Label Content="4,45 PLN" HorizontalAlignment="Left" Margin="95,31,0,0" VerticalAlignment="Top" Width="155" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="51" FontSize="24"/>
+                <Image Source="Icons/icons8_Japan_96px.png" Margin="10,20,150,20" />
+            </Grid>
+
+        </Grid>
+
+        <!--currency-->
+        <Grid x:Name="Currency_Grid" HorizontalAlignment="Left" Height="545" Margin="181,45,0,0" VerticalAlignment="Top" Width="809" Visibility="Hidden">
+            <Label Content="Szczegółowe informacje o walucie:" HorizontalAlignment="Left" Margin="35,46,0,0" VerticalAlignment="Top" Width="715" Height="55" Background="#00000000" Foreground="White" FontSize="24"/>
+            <ComboBox Margin="35,106,401,399" Background="#FFE4E4F6" />
+            <Label Content="Nazwa waluty" HorizontalAlignment="Left" Margin="35,218,0,0" VerticalAlignment="Top" Width="715" Height="66" Background="#00000000" Foreground="White" FontSize="36"/>
+            <Label Content="Kod waluty:" HorizontalAlignment="Left" Margin="35,302,0,0" VerticalAlignment="Top" Width="159" Height="39" Background="#00000000" Foreground="White" FontSize="20"/>
+            <Label Content="Kurs średni:" HorizontalAlignment="Left" Margin="35,346,0,0" VerticalAlignment="Top" Width="159" Height="39" Background="#00000000" Foreground="White" FontSize="20"/>
+            <Label Content="Cena sprzedaży:" HorizontalAlignment="Left" Margin="35,390,0,0" VerticalAlignment="Top" Width="159" Height="39" Background="#00000000" Foreground="White" FontSize="20"/>
+            <Label Content="Cena kupna:" HorizontalAlignment="Left" Margin="35,434,0,0" VerticalAlignment="Top" Width="159" Height="39" Background="#00000000" Foreground="White" FontSize="20"/>
+            <Label Content="USD" HorizontalAlignment="Left" Margin="232,302,0,0" VerticalAlignment="Top" Width="158" Height="39" Background="#00000000" Foreground="White" FontSize="20"/>
+            <Label Content="3.50 PLN" HorizontalAlignment="Left" Margin="232,346,0,0" VerticalAlignment="Top" Width="158" Height="39" Background="#00000000" Foreground="White" FontSize="20"/>
+            <Label Content="3.32 PLN" HorizontalAlignment="Left" Margin="232,385,0,0" VerticalAlignment="Top" Width="158" Height="39" Background="#00000000" Foreground="White" FontSize="20"/>
+            <Label Content="3.60 PLN" HorizontalAlignment="Left" Margin="232,429,0,0" VerticalAlignment="Top" Width="158" Height="39" Background="#00000000" Foreground="White" FontSize="20"/>
+
+        </Grid>
+
+        <!--converter-->
+        <Grid x:Name="Converter_Grid" HorizontalAlignment="Left" Height="555" Margin="181,45,0,0" VerticalAlignment="Top" Width="819" Visibility="Hidden">
+            <Label Content="Przeliczanie walut" HorizontalAlignment="Left" Margin="35,46,0,0" VerticalAlignment="Top" Width="715" Height="55" Background="#00000000" Foreground="White" FontSize="24"/>
+            <Grid Margin="10,152,10,243" Background="#141823" >
+                <TextBox HorizontalAlignment="Left" Margin="31,50,0,50" TextWrapping="Wrap" Text="10" Width="101" Background="#FF1B2028" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="{x:Null}"/>
+                <ComboBox HorizontalAlignment="Left" Margin="150,50,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
+                <Label Content="= 123 PLN" HorizontalAlignment="Left" Margin="255,50,0,0" VerticalAlignment="Top" Width="443" Height="60" Foreground="White" FontSize="24" VerticalContentAlignment="Center"/>
+            </Grid>
+            <Grid Margin="10,327,10,68" Background="#141823" >
+                <TextBox HorizontalAlignment="Left" Margin="31,50,0,50" TextWrapping="Wrap" Text="10" Width="101" Background="#FF1B2028" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="{x:Null}"/>
+                <ComboBox HorizontalAlignment="Left" Margin="286,50,0,0" VerticalAlignment="Top" Width="80" Height="60"/>
+                <Label Content="PLN = 123" HorizontalAlignment="Left" Margin="150,49,0,0" VerticalAlignment="Top" Width="128" Height="60" Foreground="White" FontSize="24" VerticalContentAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                    <Label.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleY="0.138"/>
+                            <RotateTransform/>
+                            <TranslateTransform Y="0.498"/>
+                        </TransformGroup>
+                    </Label.RenderTransform>
+                </Label>
+            </Grid>
+        </Grid>
+
+        <!--author-->
+        <Grid x:Name="Author_Grid" HorizontalAlignment="Left" Height="560" Margin="176,40,0,0" VerticalAlignment="Top" Width="824" Visibility="Visible">
+            <Label Content="Autor:" Height="40" Margin="175,155,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" HorizontalAlignment="Left" Width="233"/>
+            <Label Content="Projekt zaliczeniowy na przedmiot &quot;Programowanie&quot;" HorizontalAlignment="Left" Margin="37,49,0,0" VerticalAlignment="Top" Width="715" Height="55" Background="#00000000" Foreground="White" FontSize="24"/>
+            <Label Content="Numer albumu:" Height="40" Margin="175,200,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" HorizontalAlignment="Left" Width="233"/>
+            <Label Content="Rok i semestr:" Height="40" Margin="175,245,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" HorizontalAlignment="Left" Width="233"/>
+            <Label Content="Wojciech Marek" Height="40" Margin="483,155,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" HorizontalAlignment="Left" Width="159"/>
+            <Label Content="57108" Height="40" Margin="483,200,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" HorizontalAlignment="Left" Width="159"/>
+            <Label Content="2017/2018 4IIZ" Height="40" Margin="483,245,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" HorizontalAlignment="Left" Width="159"/>
+            <Label Content="Kod źródłowy projektu:" Height="40" Margin="175,290,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" HorizontalAlignment="Left" Width="233"/>
+            <Label Content="Link" Height="40" Margin="483,290,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" HorizontalAlignment="Left" Width="159"/>
+        </Grid>
+
 
     </Grid>
 </Window>

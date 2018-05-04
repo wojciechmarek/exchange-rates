@@ -32,7 +32,46 @@ namespace ExchangeRates
 
         private void navButton_Click(object sender, RoutedEventArgs e)
         {
-            Environment.Exit(0);
+            var button = sender as Button;
+            switch (button.Name)
+            {
+                case "navButton_main":
+                    Main_Grid.Visibility = Visibility.Visible;
+                    Currency_Grid.Visibility = Visibility.Hidden;
+                    Converter_Grid.Visibility = Visibility.Hidden;
+                    Author_Grid.Visibility = Visibility.Hidden;
+                    titleLabel.Content = "Główne kursy walut";
+                    break;
+
+                case "navButton_currency":
+                    Main_Grid.Visibility = Visibility.Hidden;
+                    Currency_Grid.Visibility = Visibility.Visible;
+                    Converter_Grid.Visibility = Visibility.Hidden;
+                    Author_Grid.Visibility = Visibility.Hidden;
+                    titleLabel.Content = "Waluta";
+                    break;
+
+                case "navButton_converter":
+                    Main_Grid.Visibility = Visibility.Hidden;
+                    Currency_Grid.Visibility = Visibility.Hidden;
+                    Converter_Grid.Visibility = Visibility.Visible;
+                    Author_Grid.Visibility = Visibility.Hidden;
+                    titleLabel.Content = "Przelicznik";
+                    break;
+
+                case "navButton_author":
+                    Main_Grid.Visibility = Visibility.Hidden;
+                    Currency_Grid.Visibility = Visibility.Hidden;
+                    Converter_Grid.Visibility = Visibility.Hidden;
+                    Author_Grid.Visibility = Visibility.Visible;
+                    titleLabel.Content = "Autor";
+                    break;
+
+
+                default:
+                    Environment.Exit(0);
+                    break;
+            }
         }
     }
 }
