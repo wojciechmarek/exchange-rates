@@ -13,6 +13,7 @@
 */
 
 using CommonServiceLocator;
+using Exchange_Rates.Model.Services;
 using GalaSoft.MvvmLight.Ioc;
 
 namespace Exchange_Rates.ViewModel
@@ -38,7 +39,7 @@ namespace Exchange_Rates.ViewModel
             ////else
             ////{
             ////    // Create run time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DataService>();
+                SimpleIoc.Default.Register<IDataAccessServices, DataAccessServices>();
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();

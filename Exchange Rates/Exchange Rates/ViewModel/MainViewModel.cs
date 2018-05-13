@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows;
+using Exchange_Rates.Model.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 
@@ -188,9 +189,10 @@ namespace Exchange_Rates.ViewModel
         {
             get { return selectedCurrency; }
             set
-            {
+            { 
                 CurrName = value;  // uihliuhn
                 selectedCurrency = value;
+                DisplaySepcificInfo();
             }
         }
 
@@ -246,17 +248,31 @@ namespace Exchange_Rates.ViewModel
 
 
         //converter grid
-        public string AmountTo { get; set; }
+        private string amountTo = 0.ToString();
+        public string AmountTo
+        {
+            get
+            {
+                return amountTo;
+            }
+            set
+            {
+                amountTo = value;
+            }
+        } 
 
-        private string currTo;
+        private string currTo = "USD";
         public string CurrTo // <- tutaj mamy co sie zmienia w combobox
         {
             get { return currTo; }
             set
-            { 
+            {
                 currTo = value;
+                ConvertTo(value);
             }
         }
+
+        
 
         private string resultTo;
         public string ResultTo
@@ -268,15 +284,27 @@ namespace Exchange_Rates.ViewModel
             }
         }
 
-        public string AmountFron { get; set; }
+        private string amountFrom = 0.ToString();
+        public string AmountFrom
+        {
+            get
+            {
+                return amountFrom;
+            }
+            set
+            {
+                amountFrom = value;
+            }
+        }
 
-        private string currFrom;
+        private string currFrom = "USD";
         public string CurrFrom // <- tutaj mamy co sie zmienia w combobox
         {
             get { return currFrom; }
             set
             {
                 currFrom = value;
+                ConvertFrom(value);
             }
         }
 
@@ -290,21 +318,90 @@ namespace Exchange_Rates.ViewModel
             }
         }
 
-        public List<string> CurrCodesList { get; set; }
+        public List<string> CurrCodesList1 { get; set; }
+        public List<string> CurrCodesList2 { get; set; }
 
         //author grid
 
+        private readonly IDataAccessServices dataAccessServices;
+        Services services = new Services();
 
         #endregion
-        public MainViewModel()
+
+        List<string> codesCurrencies = new List<string>();
+        List<string> fullCurrencies = new List<string>();
+
+        public MainViewModel(IDataAccessServices dataAccessServices)
         {
+            this.dataAccessServices = dataAccessServices;
+            //this.dataAccessServices = dataAccessServices;
             InitEvents();
-            CurrenciesList = new List<string> { "test1", "tesdfst1", "tessdft1" };
-            CurrCodesList = new List<string> { "pln", "usd", "jpy", "cad", "eur" };
+            ProcessData();
 
-    }
+            ConvertFrom("USD");
+            ConvertTo("USD");
 
-    private void InitEvents()
+        }
+
+        private void ProcessData()
+        {
+
+
+            dataAccessServices.GetGeneralCurrencies(
+                (item, error) =>
+                {
+                    if (error != null)
+                    {
+                        TitleLabel = error.InnerException.Message;
+                        return;
+                    }
+                    else
+                    {
+
+                    }
+
+                    Date = item.effectiveDate;
+                    Usd = item.rates[1].mid;
+                    Eur = item.rates[7].mid;
+                    Chf = item.rates[9].mid;
+                    Cad = item.rates[4].mid;
+                    Gbp = item.rates[10].mid;
+                    Nzd = item.rates[5].mid;
+                    Aud = item.rates[2].mid;
+                    Rub = item.rates[29].mid;
+                    Jpy = item.rates[12].mid * 100;
+                    
+
+                });
+
+                dataAccessServices.GetSpecificCurrencies(
+                 (item, error) =>
+                 {
+                     if (error != null)
+                     {
+                         TitleLabel = error.InnerException.Message;
+                         return;
+                     }
+                     else
+                     {
+
+                     }
+
+                     
+                     for (int i = 0; i < 13; i++)
+                     {
+                         codesCurrencies.Add(item.rates[i].code);
+                         fullCurrencies.Add(item.rates[i].currency);
+                     }
+
+                     CurrCodesList1 = codesCurrencies;
+                     CurrenciesList = fullCurrencies;
+                     CurrCodesList2 = CurrCodesList1;
+
+                 });
+        }
+
+        private void InitEvents()
         {
             NavigationButtons = new RelayCommand<object>(ChangeGrid);
             CloseApplicationButton = new RelayCommand(CloseApp);
@@ -358,6 +455,102 @@ namespace Exchange_Rates.ViewModel
 
                     break;
             }
+        }
+
+
+        private void ConvertTo(string name)
+        {
+            float amountTo;
+            float.TryParse(AmountTo, out amountTo);
+
+            dataAccessServices.GetSpecificCurrencies(
+                   (item, error) =>
+                   {
+                       if (error != null)
+                       {
+                           TitleLabel = error.InnerException.Message;
+                           return;
+                       }
+                       else
+                       {
+
+                       }
+
+                       for (int i = 0; i < 13; i++)
+                       {
+                           if (item.rates[i].code == CurrTo)
+                           {
+                               ResultTo = (amountTo * (float)item.rates[i].bid).ToString();
+                           }
+                       }
+
+
+
+                   });
+
+        }
+
+        private void ConvertFrom(string name)
+        {
+            float amountFrom;
+            float.TryParse(AmountFrom, out amountFrom);
+
+            dataAccessServices.GetSpecificCurrencies(
+                  (item, error) =>
+                  {
+                      if (error != null)
+                      {
+                          TitleLabel = error.InnerException.Message;
+                          return;
+                      }
+                      else
+                      {
+
+                      }
+
+                      for (int i = 0; i < 13; i++)
+                      {
+                          if (item.rates[i].code == CurrFrom)
+                          {
+                              ResultFrom = (amountFrom / (float)item.rates[i].ask).ToString();
+                          }
+                      }
+
+
+
+                  });
+        }
+
+        private void DisplaySepcificInfo()
+        {
+
+            dataAccessServices.GetSpecificCurrencies(
+                   (item, error) =>
+                   {
+                       if (error != null)
+                       {
+                           TitleLabel = error.InnerException.Message;
+                           return;
+                       }
+                       else
+                       {
+
+                       }
+
+                       for (int i = 0; i < 13; i++)
+                       {
+                           if (item.rates[i].currency == SelectedCurrency)
+                           {
+                               CurrCode = item.rates[i].code;
+                               MainRate = (item.rates[i].ask + item.rates[i].bid)/2;
+                               MinRate = (float)item.rates[i].ask;
+                               MaxRate = (float)item.rates[i].bid;
+                           }
+                       }
+
+                       
+
+                   });
         }
     }
 }

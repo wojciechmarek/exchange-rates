@@ -164,7 +164,7 @@
                 <Image Source="../Icons/icons8_Russian_Federation_96px.png" Margin="10,20,150,20" />
             </Grid>
             <Grid HorizontalAlignment="Left" Height="100" Margin="549,376,0,0" VerticalAlignment="Top" Width="260" Background="#FF141823">
-                <Label Content="Jen japoński" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="150" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Label Content="Jen japoński [100]" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" Width="150" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 <Label Content="{Binding Jpy}"  ContentStringFormat=" {0:c}" Language="pl-PL" HorizontalAlignment="Left" Margin="95,31,0,0" VerticalAlignment="Top" Width="155" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="51" FontSize="24"/>
                 <Image Source="../Icons/icons8_Japan_96px.png" Margin="10,20,150,20" />
             </Grid>
@@ -192,13 +192,13 @@
             <Label Content="Przeliczanie walut" HorizontalAlignment="Left" Margin="35,46,0,0" VerticalAlignment="Top" Width="715" Height="55" Background="#00000000" Foreground="White" FontSize="24"/>
             <Grid Margin="10,152,10,243" Background="#141823" >
                 <TextBox Text="{Binding AmountTo, Mode=TwoWay}" HorizontalAlignment="Left" Margin="31,50,0,50" TextWrapping="Wrap"  Width="101" Background="#FF1B2028" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="{x:Null}"/>
-                <ComboBox ItemsSource="{Binding CurrCodesList}" SelectedValue="{Binding CurrTo}"  SelectedIndex="0" HorizontalAlignment="Left" Margin="150,50,0,0" VerticalAlignment="Top" Width="80" Height="60" FontWeight="Bold" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                <Label Content="= 123 PLN" HorizontalAlignment="Left" Margin="255,50,0,0" VerticalAlignment="Top" Width="443" Height="60" Foreground="White" FontSize="24" VerticalContentAlignment="Center"/>
+                <ComboBox ItemsSource="{Binding CurrCodesList1}" SelectedValue="{Binding CurrTo}"  HorizontalAlignment="Left" Margin="150,50,0,0" VerticalAlignment="Top" Width="80" Height="60" FontWeight="Bold" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Label Content="{Binding ResultTo}" ContentStringFormat="= {0} PLN" Language="pl-PL" HorizontalAlignment="Left" Margin="255,50,0,0" VerticalAlignment="Top" Width="443" Height="60" Foreground="White" FontSize="24" VerticalContentAlignment="Center"/>
             </Grid>
             <Grid Margin="10,327,10,68" Background="#141823" >
                 <TextBox Text="{Binding AmountFrom, Mode=TwoWay}" HorizontalAlignment="Left" Margin="31,50,0,50" TextWrapping="Wrap" Width="101" Background="#FF1B2028" Foreground="White" FontSize="24" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="{x:Null}"/>
-                <ComboBox ItemsSource="{Binding CurrCodesList}" SelectedValue="{Binding CurrFrom}"  SelectedIndex="2" HorizontalAlignment="Left" Margin="286,50,0,0" VerticalAlignment="Top" Width="80" Height="60" FontWeight="Bold" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                <Label Content="PLN = 123" HorizontalAlignment="Left" Margin="150,49,0,0" VerticalAlignment="Top" Width="128" Height="60" Foreground="White" FontSize="24" VerticalContentAlignment="Center" RenderTransformOrigin="0.5,0.5"/>
+                <ComboBox ItemsSource="{Binding CurrCodesList2}" SelectedValue="{Binding CurrFrom}"  HorizontalAlignment="Left" Margin="350,50,0,0" VerticalAlignment="Top" Width="80" Height="60" FontWeight="Bold" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Label Content="{Binding ResultFrom}" ContentStringFormat="PLN = {0}" Language="pl-PL" HorizontalAlignment="Left" Margin="150,49,0,0" VerticalAlignment="Top" Width="240" Height="60" Foreground="White" FontSize="24" VerticalContentAlignment="Center" RenderTransformOrigin="0.5,0.5"/>
             </Grid>
         </Grid>
 
