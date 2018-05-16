@@ -40,7 +40,7 @@ namespace Exchange_Rates.ViewModel
         public RelayCommand<object> NavigationButtons { get; set; }
 
         //grid visibility
-        private bool mainGridVisibility = false;
+        private bool mainGridVisibility = true;
         public bool MainGridVisibility
         {
             get { return mainGridVisibility; }
@@ -60,7 +60,7 @@ namespace Exchange_Rates.ViewModel
             }
         }
 
-        private bool converterGridVisibility = true;
+        private bool converterGridVisibility = false;
         public bool ConverterGridVisibility
         {
             get { return converterGridVisibility; }
