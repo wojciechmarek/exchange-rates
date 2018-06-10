@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Exchange_Rates.Model.Services
 {
+    /// <summary>
+    /// Interfejs dostarczający prototypy metod do obsługi zapytań o waluty z serwera.
+    /// </summary>
     public interface IDataAccessServices
     {
          void GetGeneralCurrencies(Action<General, Exception> callback);

@@ -19,14 +19,14 @@ using GalaSoft.MvvmLight.Ioc;
 namespace Exchange_Rates.ViewModel
 {
     /// <summary>
-    /// This class contains static references to all the view models in the
-    /// application and provides an entry point for the bindings.
+    /// Klasa zawiera wszystkie statyczne odniesienia do ModelView
+    /// w aplikacji i dostarcza punkt wejscia do bindowania
     /// </summary>
     public class ViewModelLocator
     {
         /// <summary>
-        /// Initializes a new instance of the ViewModelLocator class.
-        /// </summary>
+        ///Inicjuje klasê ViewModelLocator class.
+        ///</summary>
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);

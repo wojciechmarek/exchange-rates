@@ -204,15 +204,14 @@
 
         <!--author-->
         <Grid x:Name="Author_Grid" HorizontalAlignment="Left" Height="560" Margin="176,40,0,0" VerticalAlignment="Top" Width="824" Visibility="{Binding AuthorGridVisibility, Converter={StaticResource BoolToVis}}">
-            <Label Content="Autor:" Height="40" Margin="175,155,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" HorizontalAlignment="Left" Width="233"/>
-            <Label Content="Projekt zaliczeniowy na przedmiot &quot;Programowanie&quot;" HorizontalAlignment="Left" Margin="40,50,0,0" VerticalAlignment="Top" Width="710" Height="55" Background="#00000000" Foreground="White" FontSize="24"/>
-            <Label Content="Numer albumu:" Height="40" Margin="175,200,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" HorizontalAlignment="Left" Width="233"/>
-            <Label Content="Rok i semestr:" Height="40" Margin="175,245,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" HorizontalAlignment="Left" Width="233"/>
+            <Label Content="Autor:" Height="40" Margin="140,155,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" HorizontalAlignment="Left" Width="233"/>
+            <Label Content="Projekt zaliczeniowy na przedmiot &quot;Programowanie&quot;" HorizontalAlignment="Center" Margin="120,50,0,0" VerticalAlignment="Top" Width="710" Height="55" Background="#00000000" Foreground="White" FontSize="24"/>
+            <Label Content="Numer albumu:" Height="40" Margin="140,200,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" HorizontalAlignment="Left" Width="233"/>
+            <Label Content="Rok i semestr:" Height="40" Margin="140,245,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" HorizontalAlignment="Left" Width="233"/>
             <Label Content="Wojciech Marek" Height="40" Margin="483,155,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" HorizontalAlignment="Left" Width="159"/>
             <Label Content="57108" Height="40" Margin="483,200,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" HorizontalAlignment="Left" Width="159"/>
             <Label Content="2017/2018 4IIZ" Height="40" Margin="483,245,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" HorizontalAlignment="Left" Width="159"/>
-            <Label Content="Kod źródłowy projektu:" Height="40" Margin="175,290,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" HorizontalAlignment="Left" Width="233"/>
-            <Label Content="Link" Height="40" Margin="483,290,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" HorizontalAlignment="Left" Width="159"/>
+
         </Grid>
 
 

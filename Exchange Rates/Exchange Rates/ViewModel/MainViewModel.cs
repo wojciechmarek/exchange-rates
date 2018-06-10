@@ -8,16 +8,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 namespace Exchange_Rates.ViewModel
 {
     /// <summary>
-    /// This class contains properties that the main View can data bind to.
-    /// <para>
-    /// Use the <strong>mvvminpc</strong> snippet to add bindable properties to this ViewModel.
-    /// </para>
-    /// <para>
-    /// You can also use Blend to data bind with the tool's support.
-    /// </para>
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
+    /// Klasa zawiera w³asciwoœci do których binduje g³ówny widok oraz metody przetwarzaj¹ce dane pobrane z warstwy modelu.
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
@@ -262,17 +253,15 @@ namespace Exchange_Rates.ViewModel
         } 
 
         private string currTo = "USD";
-        public string CurrTo // <- tutaj mamy co sie zmienia w combobox
+        public string CurrTo
         {
             get { return currTo; }
             set
             {
                 currTo = value;
-                ConvertTo(value);
+                ConvertTo();
             }
         }
-
-        
 
         private string resultTo;
         public string ResultTo
@@ -298,13 +287,13 @@ namespace Exchange_Rates.ViewModel
         }
 
         private string currFrom = "USD";
-        public string CurrFrom // <- tutaj mamy co sie zmienia w combobox
+        public string CurrFrom
         {
             get { return currFrom; }
             set
             {
                 currFrom = value;
-                ConvertFrom(value);
+                ConvertFrom();
             }
         }
 
@@ -322,7 +311,6 @@ namespace Exchange_Rates.ViewModel
         public List<string> CurrCodesList2 { get; set; }
 
         //author grid
-
         private readonly IDataAccessServices dataAccessServices;
         Services services = new Services();
 
@@ -331,23 +319,26 @@ namespace Exchange_Rates.ViewModel
         List<string> codesCurrencies = new List<string>();
         List<string> fullCurrencies = new List<string>();
 
+        /// <summary>
+        /// G³ówny konstruktor klasy
+        /// </summary>
+        /// <param name="dataAccessServices">Parametr wymuszony przez bibliotekê MVVM Light.</param>
         public MainViewModel(IDataAccessServices dataAccessServices)
         {
             this.dataAccessServices = dataAccessServices;
-            //this.dataAccessServices = dataAccessServices;
             InitEvents();
             ProcessData();
 
-            ConvertFrom("USD");
-            ConvertTo("USD");
-
+            ConvertFrom();
+            ConvertTo();
         }
 
+        /// <summary>
+        /// Metoda przetwarzaj¹ca pobrane dane z warstwy modelu na pola publiczne.
+        /// </summary>
         private void ProcessData()
         {
-
-
-            dataAccessServices.GetGeneralCurrencies(
+             dataAccessServices.GetGeneralCurrencies(
                 (item, error) =>
                 {
                     if (error != null)
@@ -355,11 +346,7 @@ namespace Exchange_Rates.ViewModel
                         TitleLabel = error.InnerException.Message;
                         return;
                     }
-                    else
-                    {
-
-                    }
-
+                    
                     Date = item.effectiveDate;
                     Usd = item.rates[1].mid;
                     Eur = item.rates[7].mid;
@@ -370,8 +357,6 @@ namespace Exchange_Rates.ViewModel
                     Aud = item.rates[2].mid;
                     Rub = item.rates[29].mid;
                     Jpy = item.rates[12].mid * 100;
-                    
-
                 });
 
                 dataAccessServices.GetSpecificCurrencies(
@@ -382,12 +367,7 @@ namespace Exchange_Rates.ViewModel
                          TitleLabel = error.InnerException.Message;
                          return;
                      }
-                     else
-                     {
-
-                     }
-
-                     
+                                          
                      for (int i = 0; i < 13; i++)
                      {
                          codesCurrencies.Add(item.rates[i].code);
@@ -401,23 +381,29 @@ namespace Exchange_Rates.ViewModel
                  });
         }
 
+        /// <summary>
+        /// Metoda pod³¹czaj¹ca metody pod zdarzenia klikniêæ w widoku.
+        /// </summary>
         private void InitEvents()
         {
             NavigationButtons = new RelayCommand<object>(ChangeGrid);
             CloseApplicationButton = new RelayCommand(CloseApp);
-
-            
         }
 
+        /// <summary>
+        /// Metoda obs³uguj¹ca przycisk zamykania okna aplikacji.
+        /// </summary>
         private void CloseApp()
         {
             Environment.Exit(0);
         }
 
+        /// <summary>
+        /// Metoda przej¹czaj¹ca gridy z zawartoœci¹.
+        /// </summary>
+        /// <param name="obj">Parametr przekazuje stringa identyfikuj¹cego dany przycisk nawigacyjny.</param>
         private void ChangeGrid(object obj)
         {
-            //MessageBox.Show(AmountTo);
-
             switch (obj.ToString())
             {
                 case "main":
@@ -434,7 +420,6 @@ namespace Exchange_Rates.ViewModel
                     ConverterGridVisibility = false;
                     AuthorGridVisibility = false;
                     TitleLabel = "Szczegó³owe kursy walut";
-
                     break;
 
                 case "converter":
@@ -443,7 +428,6 @@ namespace Exchange_Rates.ViewModel
                     ConverterGridVisibility = true;
                     AuthorGridVisibility = false;
                     TitleLabel = "Przelicznik walut";
-
                     break;
 
                 case "author":
@@ -452,13 +436,14 @@ namespace Exchange_Rates.ViewModel
                     ConverterGridVisibility = false;
                     AuthorGridVisibility = true;
                     TitleLabel = "Autor";
-
                     break;
             }
         }
 
-
-        private void ConvertTo(string name)
+        /// <summary>
+        /// Metoda konwertuje walutê polsk¹ na walutê wybran¹ w combobox.
+        /// </summary>
+        private void ConvertTo()
         {
             float amountTo;
             float.TryParse(AmountTo, out amountTo);
@@ -471,11 +456,7 @@ namespace Exchange_Rates.ViewModel
                            TitleLabel = error.InnerException.Message;
                            return;
                        }
-                       else
-                       {
-
-                       }
-
+                       
                        for (int i = 0; i < 13; i++)
                        {
                            if (item.rates[i].code == CurrTo)
@@ -483,14 +464,14 @@ namespace Exchange_Rates.ViewModel
                                ResultTo = (amountTo * (float)item.rates[i].bid).ToString();
                            }
                        }
-
-
-
                    });
 
         }
 
-        private void ConvertFrom(string name)
+        /// <summary>
+        /// Metoda konwertuje walutê zagraniczn¹ na walutê wybran¹ w combobox.
+        /// </summary>
+        private void ConvertFrom()
         {
             float amountFrom;
             float.TryParse(AmountFrom, out amountFrom);
@@ -503,10 +484,6 @@ namespace Exchange_Rates.ViewModel
                           TitleLabel = error.InnerException.Message;
                           return;
                       }
-                      else
-                      {
-
-                      }
 
                       for (int i = 0; i < 13; i++)
                       {
@@ -515,15 +492,14 @@ namespace Exchange_Rates.ViewModel
                               ResultFrom = (amountFrom / (float)item.rates[i].ask).ToString();
                           }
                       }
-
-
-
                   });
         }
 
+        /// <summary>
+        /// Metoda wype³nia pola szczegó³owe o danej walucie.
+        /// </summary>
         private void DisplaySepcificInfo()
         {
-
             dataAccessServices.GetSpecificCurrencies(
                    (item, error) =>
                    {
@@ -532,11 +508,7 @@ namespace Exchange_Rates.ViewModel
                            TitleLabel = error.InnerException.Message;
                            return;
                        }
-                       else
-                       {
-
-                       }
-
+                       
                        for (int i = 0; i < 13; i++)
                        {
                            if (item.rates[i].currency == SelectedCurrency)
@@ -547,9 +519,6 @@ namespace Exchange_Rates.ViewModel
                                MaxRate = (float)item.rates[i].bid;
                            }
                        }
-
-                       
-
                    });
         }
     }

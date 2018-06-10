@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Exchange_Rates.Model.Mappings
 { 
-
-
+    /// <summary>
+    /// Klasa mapująca tabelę głównych kursów walut pobranych z serwera.
+    /// </summary>
     public class General
     {
         public string effectiveDate { get; set; }
@@ -17,8 +18,5 @@ namespace Exchange_Rates.Model.Mappings
         {
             public float mid { get; set; }
         }
-    }
-
-  
-    
+    } 
 }

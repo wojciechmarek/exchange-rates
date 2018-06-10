@@ -2,6 +2,10 @@
 
 namespace Exchange_Rates.Model.Services
 {
+
+    /// <summary>
+    /// Klasa mapująca tabelę szczególowych kursów walut pobranych z serwera.
+    /// </summary>
     public class Specific
     {
         public List<Symbols> rates { get; set; }
@@ -14,6 +18,4 @@ namespace Exchange_Rates.Model.Services
             public float ask { get; set; }
         }
     }
-
-    
 }
