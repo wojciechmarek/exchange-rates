@@ -7,7 +7,6 @@ ExchangeRates were made while I was in my second year of study to pass individua
 
 ## Screenshots
 - The main page - is showing actual rates of currencies to polish zloty:
-
 ![main](https://user-images.githubusercontent.com/27026036/52060226-11646a80-256c-11e9-85be-0aa38bb1138e.PNG)
 
 - Details page - is showing the specific information about currency
