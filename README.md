@@ -3,7 +3,7 @@
 This project shows current exchange rates against polish currency 💰 (PLN/złoty). It allows you to quickly see different exchange rates fetch from the currency API, see details of a particular currency and also convert them.
 
 ## Purpose
-ExchangeRates were made while I was in my second year of study to pass individual projects.
+Exchange Rates were made while I was in my second year of study to pass individual project.
 
 ## Screenshots
 - The main page - is showing current rates of currencies to polish zloty:
